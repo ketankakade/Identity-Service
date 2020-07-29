@@ -10,7 +10,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * Response class for rest APIs
+ * Response class for Identity Service APIs
  *
  */
 @Builder

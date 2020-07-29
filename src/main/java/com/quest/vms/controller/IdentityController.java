@@ -21,16 +21,16 @@ import com.quest.vms.exception.ServiceException;
 import com.quest.vms.service.IdentityService;
 
 @RestController
-@RequestMapping("/" + USER_URL_PATH)
+@RequestMapping("/" + IDENTITY_URL_PATH)
 public class IdentityController {
 
 	@Autowired
-	private IdentityService userIdentityService;
+	private IdentityService identityService;
 
 	@PostMapping(SIGN_UP)
 	public ResponseEntity<GenericResponse<SignUpRes>> signUpUser(@Valid @RequestBody UserSignup dto) {
 		try {
-			GenericResponse<SignUpRes> signUpResGenericRes = userIdentityService.signUpUser(dto);
+			GenericResponse<SignUpRes> signUpResGenericRes = identityService.signUpUser(dto);
 			return ResponseEntity.status(signUpResGenericRes.getMessageCode()).body(signUpResGenericRes);
 		} catch (ServiceException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -40,7 +40,7 @@ public class IdentityController {
 	@PostMapping(SIGN_IN)
 	public ResponseEntity<GenericResponse<SignInRes>> signInUser(@Valid @RequestBody SignInReq request) {
 		try {
-			GenericResponse<SignInRes> signInResponse = userIdentityService.signInUser(request);
+			GenericResponse<SignInRes> signInResponse = identityService.signInUser(request);
 			return ResponseEntity.status(signInResponse.getMessageCode()).body(signInResponse);
 		} catch (ServiceException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
